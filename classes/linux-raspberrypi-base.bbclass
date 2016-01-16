@@ -2,7 +2,7 @@ inherit linux-kernel-base
 
 
 def get_dts(d, ver):
-    staging_dir = d.getVar("STAGING_KERNEL_BUILDDIR", True)
+    staging_dir = d.getVar("STAGING_KERNEL_DIR", True)
     dts = d.getVar("KERNEL_DEVICETREE", True)
 
     # d.getVar() might return 'None' as a normal string
@@ -11,7 +11,7 @@ def get_dts(d, ver):
     if ver is None or ver == "None":
         ''' if 'ver' isn't set try to grab the kernel version
         from the kernel staging '''
-        ver = get_kernelversion_file(staging_dir)
+        ver = get_kernelversion(staging_dir)
 
     if ver is not None:
         min_ver = ver.split('.', 3)
